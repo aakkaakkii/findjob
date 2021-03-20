@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/findjob
+    username: postgres
+    password: postgres
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+jwt:
+  token:
+    secret: JWTeDiToRaPp
+    activation:
+      expired: 86400000
