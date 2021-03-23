@@ -5,6 +5,7 @@ import ge.find.findjob.domain.Role;
 import ge.find.findjob.domain.User;
 import ge.find.findjob.util.ApiConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,14 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/current")
+//    @Secured("ROLE_ADMIN")
+        @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public User getCurrentUser() {
+        return userService.getCurrentUser();
+    }
+
     @GetMapping
-//    @PreAuthorize("hasAuthority('ADMIN')")
     public List<User> loadUsers() {
         return userService.loadUsers();
     }

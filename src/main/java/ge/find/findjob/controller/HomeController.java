@@ -14,8 +14,8 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String loginPage() {
-        return "index.html#login";
+    public ModelAndView loginPage() {
+        return new ModelAndView("redirect:" + "index.html#/login");
     }
 
     @GetMapping("/public/reset")

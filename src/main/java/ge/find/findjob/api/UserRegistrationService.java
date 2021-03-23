@@ -5,5 +5,5 @@ import ge.find.findjob.model.RegistrationRequestModel;
 
 public interface UserRegistrationService {
     User register(RegistrationRequestModel user);
-    void activate(String token);
+    User activate(String token);
 }

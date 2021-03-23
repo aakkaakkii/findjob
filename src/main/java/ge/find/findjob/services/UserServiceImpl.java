@@ -5,6 +5,7 @@ import ge.find.findjob.domain.Role;
 import ge.find.findjob.domain.User;
 import ge.find.findjob.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,6 +60,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Role> loadRoles() {
         return Arrays.asList(Role.values());
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user instanceof User) {
+            return (User) user;
+        }
+
+        return null;
     }
 
     @Override

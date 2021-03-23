@@ -8,7 +8,6 @@ import "./locale/i18n";
 
 function App() {
     return (
-        <div>
             <Router>
                 <Switch>
                     <Route path={"/admin"} render={({match: {url}}) => <AdminApplication url={url}/>}/>
@@ -16,7 +15,6 @@ function App() {
                     <Route path={"/"} render={() => <Application/>}/>
                 </Switch>
             </Router>
-        </div>
     );
 }
 

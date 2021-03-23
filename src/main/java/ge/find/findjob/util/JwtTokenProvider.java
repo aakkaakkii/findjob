@@ -10,8 +10,8 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
-    private static String secret;
-    private static long activationTokenInMilliseconds;
+    private static String secret = "test";
+    private static long activationTokenInMilliseconds = 86400000;
 
     public static String createToken(String username) {
         Claims claims = Jwts.claims().setSubject(username);
@@ -42,9 +42,12 @@ public class JwtTokenProvider {
     }
 
     @Value("${jwt.token.secret}")
-    public void setSecret(String secret){
+    public void setSecret(String secret) {
         JwtTokenProvider.secret = secret;
-    };
+    }
+
+    ;
+
     @Value("${jwt.token.activation.expired}")
     public void setActivationTokenInMilliseconds(long activationTokenInMilliseconds) {
         JwtTokenProvider.activationTokenInMilliseconds = activationTokenInMilliseconds;

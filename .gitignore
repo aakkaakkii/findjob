@@ -128,7 +128,8 @@ node
 bower_components
 
 *.sublime*
-
+target
+build
 psd
 thumb
 sketch

@@ -28,13 +28,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             throw new RuntimeException("already exists");
         }
 
-        if (user.password != user.repeatPassword) {
+        if (!user.password.equals(user.repeatPassword)) {
             throw new RuntimeException("password dont match");
         }
 
         User newUser = new User();
 
         newUser.setUsername(user.username);
+        newUser.setNickname(user.nickname);
         newUser.setEmail(user.email);
         newUser.setActive(false);
         newUser.setPassword(passwordEncoder.encode(user.password));
@@ -48,14 +49,15 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     @Override
-    public void activate(String token) {
+    public User activate(String token) {
         if (JwtTokenProvider.validateToken(token)) {
             User user = userRepository.findByUsername(JwtTokenProvider.getUsername(token));
 
             if (user != null) {
                 user.setActive(true);
-                userRepository.save(user);
+                return userRepository.save(user);
             }
         }
+        return null;
     }
 }

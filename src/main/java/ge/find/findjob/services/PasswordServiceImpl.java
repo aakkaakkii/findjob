@@ -27,24 +27,25 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     @Override
-    public void resetPassword(String token, PasswordRequestModel password) {
+    public User resetPassword(String token, PasswordRequestModel password) {
         User user = userRepository.findByUsername(JwtTokenProvider.getUsername(token));
 
         if (user != null && password.password.equals(password.repeatPassword)) {
             user.setPassword(passwordEncoder.encode(password.password));
             userRepository.save(user);
         }
+        return user;
     }
 
     @Override
-    public void changePassword(ChangePasswordRequestModel resetPassword, String initiatorUsername) {
-        User user = userRepository.findByUsername(resetPassword.username);
+    public User changePassword(ChangePasswordRequestModel resetPassword, String initiatorUsername) {
+        User user = userRepository.findByUsername(initiatorUsername);
 
-        if (user != null && user.getUsername().equals(initiatorUsername)
-                && passwordEncoder.matches(resetPassword.currentPassword, user.getPassword())
-                && resetPassword.currentPassword.equals(resetPassword.newPassword)) {
+        if (user != null && passwordEncoder.matches(resetPassword.currentPassword, user.getPassword())
+                && resetPassword.newPassword.equals(resetPassword.repeatPassword)) {
             user.setPassword(passwordEncoder.encode(resetPassword.newPassword));
             userRepository.save(user);
         }
+        return user;
     }
 }

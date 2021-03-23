@@ -14,3 +14,7 @@ export const loadRoles = () => {
 export const addUser = (user) => {
     return axios.post(`${BASE_REST_URL_WITH_USERS}`, user)
 }
+
+export const getCurrentUser = () => {
+    return axios.get(`${BASE_REST_URL_WITH_USERS}/current`)
+}

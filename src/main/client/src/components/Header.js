@@ -4,6 +4,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import {ThemeContext, ThemeUpdateContext} from "../styles/ThemeWrapper";
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import {Menu, MenuItem} from "@material-ui/core";
+import useCurrentUser from "../hoc/user/useCurrentUser";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,6 +39,16 @@ const Header = () => {
     const classes = useStyles();
     const changeTheme = useContext(ThemeUpdateContext);
     const theme = useContext(ThemeContext);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const {username, isUserLoggedIn, nickname} = useCurrentUser();
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <div className={classes.root}>
@@ -55,15 +67,32 @@ const Header = () => {
                     <Link className={classes.navbarLink} to="/candidates">candidates</Link>
                 </li>
                 <li>
-                    <div
-                        className={classes.themeSwitch}
-                        onClick={() => changeTheme()}>
-                        { theme === 'light' ? <Brightness4Icon/> : <Brightness7Icon/> }
-                    </div>
-                    {/*<Button variant="contained" color="primary" onClick={() => changeTheme()}>change theme</Button>*/}
+                    <div onClick={handleClick}>{
+                        isUserLoggedIn ? username.toUpperCase().slice(0, 1): '...'
+                    }</div>
                 </li>
             </ul>
-
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <div
+                    className={classes.themeSwitch}
+                    onClick={() => changeTheme()}>
+                    { theme === 'light' ? <Brightness4Icon/> : <Brightness7Icon/> }
+                </div>
+                {
+                    isUserLoggedIn && <>
+                        <MenuItem onClick={handleClose}>{username}</MenuItem>
+                        <MenuItem onClick={handleClose}>vacancies</MenuItem>
+                        <MenuItem onClick={handleClose}>cvs</MenuItem>
+                    </>
+                }
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+            </Menu>
         </div>
 
     )
