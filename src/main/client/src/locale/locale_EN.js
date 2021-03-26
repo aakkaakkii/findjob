@@ -1,6 +1,7 @@
 const locale_EN = {
     translation: {
-        test: 'test 22'
+        test: 'test 22',
+        language: 'language'
     }
 }
 

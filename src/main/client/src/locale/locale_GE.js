@@ -1,6 +1,7 @@
 const locale_GE = {
     translation: {
-        test: '2222'
+        test: '2222',
+        language: 'ენა'
     }
 }
 

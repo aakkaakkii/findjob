@@ -18,8 +18,8 @@ const UserForm = ({selectedUser, roles}) => {
         nickname: '',
         email: '',
         password: '',
-        active: true,
-        blocked: false,
+        active: null,
+        blocked: null,
         roles: [],
     });
 

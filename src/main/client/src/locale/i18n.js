@@ -3,6 +3,8 @@ import {initReactI18next} from "react-i18next";
 import locale_GE from "./locale_GE";
 import locale_EN from "./locale_EN";
 
+export const EN = "en";
+export const GE = "ge";
 
 const resources = {
     ge: locale_GE,

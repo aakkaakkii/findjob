@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("/current")
 //    @Secured("ROLE_ADMIN")
-        @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public User getCurrentUser() {
         return userService.getCurrentUser();
     }

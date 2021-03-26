@@ -17,24 +17,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UserManagement = () => {
+const UserManagement = ({roles, users, selectedUser, selectUser}) => {
     const classes = useStyles();
-    const [users, setUsers] = useState([]);
-    const [roles, setRoles] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-
-    useEffect(async () => {
-        let usersResponse = await loadUsers();
-        setUsers(usersResponse.data);
-        let rolesResponse = await loadRoles();
-        setRoles(rolesResponse.data)
-    },[]);
-
-    const selectUser = (id) => {
-        let user = users.find(u => u.id === id);
-        setSelectedUser(user);
-        console.log(user)
-    };
 
     return (
         <div className={classes.root}>
