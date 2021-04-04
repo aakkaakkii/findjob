@@ -7,27 +7,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vacancy {
+public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
     private String description;
-    private Date creationTime;
-    private double salary;
-    private VacancyType vacancyType;
-    private boolean blocked;
+    private Date startDate;
+    private Date endDate;
 
-    @ManyToMany
-    private List<ProfessionTag> professionTags;
     @ManyToOne
-    @JoinColumn(name = "organisation_id")
-    private Organisation organisation;
+    private User user;
 }

@@ -23,9 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const MainPage = () => {
     const [vacancies, setVacancies] = useState([]);
     const classes = useStyles();
-    const { t, i18n } = useTranslation();
-
-    console.log(i18n)
+    const { t } = useTranslation();
 
     useEffect(() => {
         setVacancies(vacancyList);

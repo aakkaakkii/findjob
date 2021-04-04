@@ -6,13 +6,15 @@ import {createMuiTheme} from "@material-ui/core";
 export const ThemeContext = React.createContext('light');
 export const ThemeUpdateContext = React.createContext();
 
-const ThemeWrapper = ({children}) => {
+const ThemeWrapper = ({disableDarkMod, children}) => {
     const [theme, setTheme] = useState(createMuiTheme(applicationTheme()));
     const [mode, setMode] = useState('light');
 
     useEffect(() => {
-        changeTheme(window.localStorage.getItem('mode') || 'light')
-    }, []);
+        if(!disableDarkMod) {
+            changeTheme(window.localStorage.getItem('mode') || 'light')
+        }
+    }, [disableDarkMod]);
 
     const changeTheme = (changedMode) => {
         setTheme(createMuiTheme(applicationTheme(changedMode)));

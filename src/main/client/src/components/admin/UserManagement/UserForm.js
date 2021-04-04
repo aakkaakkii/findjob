@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {useEffect, useState} from "react";
-import {Button, FormControl, Select, TextField} from "@material-ui/core";
+import {Button, Select, TextField} from "@material-ui/core";
 import {addUser} from "../../../api/admin/userManagementApi";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,8 +18,8 @@ const UserForm = ({selectedUser, roles}) => {
         nickname: '',
         email: '',
         password: '',
-        active: null,
-        blocked: null,
+        active: false,
+        blocked: false,
         roles: [],
     });
 

@@ -23,6 +23,14 @@ public class CV {
     private double expectedSalary;
     @ManyToMany
     private List<ProfessionTag> professionTags;
+    private boolean blocked;
+    //TODO remove?
     private String cvDoc;
 
+    @OneToMany
+    private List<Experience> experiences;
+    @OneToMany
+    private List<Education> educations;
+    @ManyToOne
+    private User user;
 }

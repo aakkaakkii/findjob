@@ -4,6 +4,7 @@ import ge.find.findjob.api.UserService;
 import ge.find.findjob.domain.Role;
 import ge.find.findjob.domain.User;
 import ge.find.findjob.repo.UserRepository;
+import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SecurityUtil securityUtil;
 
     @Override
     public User getById(long id) {
@@ -64,12 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getCurrentUser() {
-        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (user instanceof User) {
-            return (User) user;
-        }
-
-        return null;
+        return securityUtil.getCurrentUser();
     }
 
     @Override

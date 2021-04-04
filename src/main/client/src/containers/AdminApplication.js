@@ -5,6 +5,7 @@ import AdminNavbar from "../components/admin/AdminNavnar/AdminNavbar";
 import {makeStyles} from "@material-ui/core/styles";
 import AdminUserManagementPage from "./pages/admin/AdminUserManagementPage";
 import AdminOrganisationPage from "./pages/admin/AdminOrganisationsPage";
+import ThemeWrapper from "../styles/ThemeWrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,16 +23,18 @@ const AdminApplication = ({url}) => {
 
     return (
         <div className={classes.root}>
+            <ThemeWrapper disableDarkMod={true}>
                 <AdminNavbar url={url}/>
-            <div className={classes.content}>
-                <Router>
-                    <Switch>
-                        <Route exact path={`${url}/`} render={() => <AdminMainPage/>}/>
-                        <Route exact path={`${url}/users`} render={() => <AdminUserManagementPage/>}/>
-                        <Route exact path={`${url}/organisations`} render={() => <AdminOrganisationPage/>}/>
-                    </Switch>
-                </Router>
-            </div>
+                <div className={classes.content}>
+                    <Router>
+                        <Switch>
+                            <Route exact path={`${url}/`} render={() => <AdminMainPage/>}/>
+                            <Route exact path={`${url}/users`} render={() => <AdminUserManagementPage/>}/>
+                            <Route exact path={`${url}/organisations`} render={() => <AdminOrganisationPage/>}/>
+                        </Switch>
+                    </Router>
+                </div>
+            </ThemeWrapper>
         </div>
     )
 };

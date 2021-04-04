@@ -1,4 +1,4 @@
-import react, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import UserManagement from "../../../components/admin/UserManagement/UserManagement";
 import {loadRoles, loadUsers} from "../../../api/admin/userManagementApi";
 
@@ -8,12 +8,16 @@ const AdminUserManagementPage = () => {
     const [roles, setRoles] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
 
-    useEffect(async () => {
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
         let usersResponse = await loadUsers();
         setUsers(usersResponse.data);
         let rolesResponse = await loadRoles();
         setRoles(rolesResponse.data)
-    }, []);
+    }
 
     const selectUser = (id) => {
         let user = users.find(u => u.id === id);

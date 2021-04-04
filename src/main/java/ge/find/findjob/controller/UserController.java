@@ -40,8 +40,8 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PutMapping
-    public User update(@RequestBody User user) {
+    @PutMapping("/{id}")
+    public User update(@PathVariable long id, @RequestBody User user) {
         return userService.updateUser(user);
     }
 

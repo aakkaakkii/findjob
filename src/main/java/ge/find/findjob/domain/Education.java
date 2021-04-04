@@ -6,29 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Organisation {
+public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String title;
-    private String description;
-    private String address;
-    private String phone;
-    private String mail;
-    private String website;
-    private boolean blocked;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "organisation")
-    private List<Vacancy> vacancies;
+    private String school;
+    private String degree;
+    private Date startDate;
+    private Date endDate;
 
     @ManyToOne
     private User user;
-
 }

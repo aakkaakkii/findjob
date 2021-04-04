@@ -39,9 +39,11 @@ const Banner = () => {
 
             </div>
             <div>
-                <img src={process.env.PUBLIC_URL +'/worker.svg'} className={classes.bannerLogo} />
+                <img
+                    alt={"banner"}
+                    src={process.env.PUBLIC_URL + '/worker.svg'}
+                    className={classes.bannerLogo}/>
             </div>
-
 
 
         </div>

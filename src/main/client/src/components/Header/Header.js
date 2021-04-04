@@ -1,11 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
-import {ThemeContext, ThemeUpdateContext} from "../../styles/ThemeWrapper";
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import {Menu, MenuItem} from "@material-ui/core";
-import useCurrentUser from "../../hoc/user/useCurrentUser";
 import UserMenu from "./UserMenu";
 
 const useStyles = makeStyles((theme) => ({

@@ -40,10 +40,10 @@ const Search = () => {
         <div className={classes.root}>
             <div>
                 <Button
-                    className={tabPosition === 0 && classes.activeBtn}
+                    className={tabPosition === 0 ? classes.activeBtn : ""}
                     onClick={() => setTabPosition(0)}>job</Button>
                 <Button
-                    className={tabPosition === 1 && classes.activeBtn}
+                    className={tabPosition === 1 ? classes.activeBtn : ""}
                     onClick={() => setTabPosition(1)}>candidate</Button>
             </div>
             <TabPanel value={tabPosition} index={0}>

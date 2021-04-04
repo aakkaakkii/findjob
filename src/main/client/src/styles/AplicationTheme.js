@@ -4,9 +4,6 @@ import lightPalette from "./lightPalette";
 const theme = (mode) => {
     let themePallet = mode === 'dark' ? darkPalette : lightPalette;
     let palletMode = (mode && mode !== 'null') ? mode : 'light'
-    console.log('-=----------------')
-    console.log('-=----------------')
-    console.log(palletMode, typeof palletMode)
 
     return {
         primaryColor: themePallet.primaryColor,
