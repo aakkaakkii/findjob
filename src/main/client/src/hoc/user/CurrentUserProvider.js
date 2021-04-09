@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from "react";
-import {getCurrentUser} from "../../api/admin/userManagementApi";
+import {getCurrentUser} from "../../api/userApi";
 
 export const ChangeUserContext = createContext(null);
 export const UserContext = createContext({roles: []});

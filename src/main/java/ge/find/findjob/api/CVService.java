@@ -15,4 +15,6 @@ public interface CVService {
     void adminDelete(long id);
     CV blockCV(long id);
     CV unblockCV(long id);
+    CV disableCV(long id);
+    CV enableCV(long id);
 }

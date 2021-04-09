@@ -3,7 +3,7 @@ import {Button, makeStyles, TextField} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const Login = () => {
+const LoginPage = () => {
     const classes = useStyles();
     return <div>
         <form method={"POST"} action="/login">
@@ -14,4 +14,4 @@ const Login = () => {
     </div>
 }
 
-export default Login;
+export default LoginPage;

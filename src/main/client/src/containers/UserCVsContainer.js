@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserCVsPage = () => {
+const UserCVsContainer = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const UserCVsPage = () => {
     )
 };
 
-export default UserCVsPage;
+export default UserCVsContainer;

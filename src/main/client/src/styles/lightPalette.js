@@ -3,6 +3,7 @@ const lightPalette = {
     primaryColorLight: "#B4B0FF",
     primarySecondaryColor: "#ff6347",
     primarySecondaryColorLight: "#FFA494",
+    oppositePlainTextColor: "#ffffff",
     plainTextColor: "rgb(0,0,0)",
     plainTextColorLight: "rgba(0,0,0,0.7)",
     palette: {

@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {useEffect, useState} from "react";
-import {loadUsers} from "../../../api/admin/userManagementApi";
+import {loadUsers} from "../../../api/userApi";
 
 const useStyles = makeStyles((theme) => ({
 

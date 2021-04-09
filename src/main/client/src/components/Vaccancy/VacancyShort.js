@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         paddingBottom: '15px',
         marginBottom: '20px',
-        borderBottom: `1px solid ${theme.primaryColor}`
+        borderBottom: `1px solid ${theme.palette.primary.main}`
     },
     title: {
         color: theme.plainTextColor,
@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     companyName: {
-        color: theme.primaryColor,
+        color: theme.palette.primary.main,
         marginRight: '5px',
         cursor: "pointer",
         "&:hover": {
-            color: theme.primaryColorLight,
+            color: theme.palette.primary.light,
         }
     },
 }));

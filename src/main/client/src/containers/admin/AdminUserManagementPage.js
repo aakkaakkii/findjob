@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import UserManagement from "../../../components/admin/UserManagement/UserManagement";
-import {loadRoles, loadUsers} from "../../../api/admin/userManagementApi";
+import UserManagement from "../../components/admin/UserManagement/UserManagement";
+import {loadRoles, loadUsers} from "../../api/userApi";
 
 
 const AdminUserManagementPage = () => {

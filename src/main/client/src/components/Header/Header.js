@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         margin: '5px 5px',
         "&:hover": {
-            color:theme.primaryColor
+            color:theme.palette.primary.main
         }
     },
     themeSwitch: {

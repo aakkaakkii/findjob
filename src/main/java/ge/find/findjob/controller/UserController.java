@@ -3,9 +3,9 @@ package ge.find.findjob.controller;
 import ge.find.findjob.api.UserService;
 import ge.find.findjob.domain.Role;
 import ge.find.findjob.domain.User;
+import ge.find.findjob.model.UserProfileRequest;
 import ge.find.findjob.util.ApiConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,6 +53,11 @@ public class UserController {
     @GetMapping("/roles")
     public List<Role> loadRoles() {
         return userService.loadRoles();
+    }
+
+    @PutMapping("/profile")
+    public User updateProfile(UserProfileRequest userProfileRequest) {
+        return userService.updateProfile(userProfileRequest);
     }
 
 }

@@ -1,20 +1,21 @@
-import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import React from "react";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        color: theme.primaryColor,
-    },
+    root: { },
 }));
 
-const AboutPage = () => {
+const CV = ({cvs}) => {
     const classes = useStyles();
+    const { t } = useTranslation();
+
 
     return (
         <div className={classes.root}>
-            about
+
         </div>
     )
 };
 
-export default AboutPage;
+export default CV;

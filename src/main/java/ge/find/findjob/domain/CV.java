@@ -24,6 +24,7 @@ public class CV {
     @ManyToMany
     private List<ProfessionTag> professionTags;
     private boolean blocked;
+    private boolean disabled;
     //TODO remove?
     private String cvDoc;
 

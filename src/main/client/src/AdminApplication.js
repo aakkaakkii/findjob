@@ -1,11 +1,11 @@
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import React from "react";
-import AdminMainPage from "./pages/admin/AdminMainPage";
-import AdminNavbar from "../components/admin/AdminNavnar/AdminNavbar";
+import AdminMainPage from "./containers/admin/AdminMainPage";
+import AdminNavbar from "./components/admin/AdminNavnar/AdminNavbar";
 import {makeStyles} from "@material-ui/core/styles";
-import AdminUserManagementPage from "./pages/admin/AdminUserManagementPage";
-import AdminOrganisationPage from "./pages/admin/AdminOrganisationsPage";
-import ThemeWrapper from "../styles/ThemeWrapper";
+import AdminUserManagementPage from "./containers/admin/AdminUserManagementPage";
+import AdminOrganisationPage from "./containers/admin/AdminOrganisationsPage";
+import ThemeWrapper from "./styles/ThemeWrapper";
 
 const useStyles = makeStyles((theme) => ({
     root: {

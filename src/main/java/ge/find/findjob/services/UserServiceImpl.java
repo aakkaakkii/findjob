@@ -3,6 +3,7 @@ package ge.find.findjob.services;
 import ge.find.findjob.api.UserService;
 import ge.find.findjob.domain.Role;
 import ge.find.findjob.domain.User;
+import ge.find.findjob.model.UserProfileRequest;
 import ge.find.findjob.repo.UserRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +68,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getCurrentUser() {
         return securityUtil.getCurrentUser();
+    }
+
+    @Override
+    public User updateProfile(UserProfileRequest userProfileRequest) {
+        User user = getCurrentUser();
+        user.setNickname(userProfileRequest.nickname);
+        return userRepository.save(user);
     }
 
     @Override

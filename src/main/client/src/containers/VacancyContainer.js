@@ -1,7 +1,7 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 
-const VacancyPage = () => {
+const VacancyContainer = () => {
     let { id } = useParams();
 
     return (
@@ -11,4 +11,4 @@ const VacancyPage = () => {
     )
 };
 
-export default VacancyPage;
+export default VacancyContainer;

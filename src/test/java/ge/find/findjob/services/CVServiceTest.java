@@ -90,6 +90,7 @@ public class CVServiceTest {
         Assertions.assertEquals(updated.getDescription(), cvRequest.description);
         Assertions.assertEquals(updated.getExpectedSalary(), cvRequest.expectedSalary);
         Assertions.assertFalse(cv.isBlocked());
+        Assertions.assertFalse(cv.isDisabled());
         Assertions.assertEquals(updated.getEducations().get(1).getId(), cvRequest.educations.get(1));
         Assertions.assertEquals(updated.getExperiences().get(1).getId(), cvRequest.experiences.get(1));
         Assertions.assertEquals(updated.getProfessionTags().get(1).getId(), cvRequest.professionTags.get(1));
@@ -130,6 +131,30 @@ public class CVServiceTest {
 
         cvService.blockCV(cv.getId());
         Assertions.assertTrue(cv.isBlocked());
+    }
+
+    @Test
+    public void disableEnableCVTest() {
+        CVRequestModel cvRequest = createCVRequest();
+        CV cv = createCv(cvRequest);
+        User user = createUser();
+
+        Mockito.when(cvRepository.getOne(Mockito.any(Long.class)))
+                .thenAnswer(i -> cv);
+
+        Mockito.when(securityUtil.getCurrentUserId())
+                .thenAnswer(i -> user.getId());
+
+        Assertions.assertFalse(cv.isDisabled());
+
+        cvService.disableCV(cv.getId());
+        Assertions.assertTrue(cv.isDisabled());
+
+        cvService.enableCV(cv.getId());
+        Assertions.assertFalse(cv.isDisabled());
+
+        cvService.disableCV(cv.getId());
+        Assertions.assertTrue(cv.isDisabled());
     }
 
     private User createUser() {

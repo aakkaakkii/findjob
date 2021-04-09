@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserVacanciesPage = () => {
+const UserVacanciesContainer = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const UserVacanciesPage = () => {
     )
 };
 
-export default UserVacanciesPage;
+export default UserVacanciesContainer;

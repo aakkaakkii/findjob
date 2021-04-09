@@ -1,41 +1,30 @@
 import React, {useEffect, useState} from "react";
-import Banner from "../../components/Banner/Banner";
 import {makeStyles} from "@material-ui/core/styles";
-import VacancyShort from "../../components/Vaccancy/VacancyShort";
-import {useTranslation} from "react-i18next";
+import VacancyShort from "../components/Vaccancy/VacancyShort";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        // display: "flex",
-        // justifyContent: "center"
-    },
+    root: {},
     vacancies: {
         display: "grid",
         gridTemplateColumns: "0.4fr",
-        justifyContent: "center",
-    },
-    vacanciesTitle: {
-        fontSize: theme.title1FontSize,
-        marginBottom: '20px'
+
+        justifyContent: "center"
     }
 }));
 
-const MainPage = () => {
+
+const VacanciesContainer = () => {
     const [vacancies, setVacancies] = useState([]);
     const classes = useStyles();
-    const { t } = useTranslation();
 
     useEffect(() => {
         setVacancies(vacancyList);
     }, []);
 
     return (
-        <div className={classes.root}>
-            <Banner/>
-            {t("test")}
-
+        <div>
             <div className={classes.vacancies}>
-                <div className={classes.vacanciesTitle}>Hot Jobs</div>
+                <div> Hot Jobs</div>
                 {vacancies.map(vacancy =>
                     <VacancyShort
                         key={vacancy.id}
@@ -47,6 +36,7 @@ const MainPage = () => {
         </div>
     )
 };
+
 
 const vacancyList = [
     {
@@ -69,4 +59,5 @@ const vacancyList = [
     }
 ]
 
-export default MainPage;
+
+export default VacanciesContainer;

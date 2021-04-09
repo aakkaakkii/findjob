@@ -1,6 +1,6 @@
 import React from "react";
 
-const CandidatePage = () => {
+const CandidatesContainer = () => {
     return (
         <div>
             about
@@ -8,4 +8,4 @@ const CandidatePage = () => {
     )
 };
 
-export default CandidatePage;
+export default CandidatesContainer;

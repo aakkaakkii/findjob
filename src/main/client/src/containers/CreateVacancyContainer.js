@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateVacancyPage = () => {
+const CreateVacancyContainer = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const CreateVacancyPage = () => {
     )
 };
 
-export default CreateVacancyPage;
+export default CreateVacancyContainer;

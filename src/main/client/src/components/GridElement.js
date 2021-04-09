@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#ececec'
     },
     selectedRow: {
-        backgroundColor: theme.primaryColor,
+        backgroundColor: theme.palette.primary.main,
         color: "#ffffff"
     },
     pagination: {

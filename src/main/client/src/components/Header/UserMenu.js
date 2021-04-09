@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         height: "24px",
         fontWeight: "700",
         borderRadius: "50%",
-        backgroundColor: theme.primaryColor,
+        backgroundColor: theme.palette.primary.main,
         color: "#FFFFFF"
     },
     userLogoOutside: {
@@ -100,7 +100,7 @@ const UserMenu = () => {
                                 <div>
                                     <div>{nickname ? nickname : username}</div>
                                     <Link
-                                        to={"userProfile"}
+                                        to={"/userProfile"}
                                         onClick={handleClose}
                                     >
                                         {t("profile")}
@@ -112,21 +112,19 @@ const UserMenu = () => {
                                 <div>
                                     <div>
                                         <Link
-                                            to={"userCVs"}
+                                            to={"/userCVs"}
                                             onClick={handleClose}>
                                             {t("cvs")}
                                         </Link>
                                     </div>
                                     <div>
                                         <Link
-                                            to={"userVacancies"}
+                                            to={"/userVacancies"}
                                             onClick={handleClose}>
                                             {t("Vaccinations")}
                                         </Link>
                                     </div>
                                 </div>
-
-
                             </div>
                             <hr/>
                         </>

@@ -41,6 +41,16 @@ public class CVRestController {
         return cvService.update(requestModel);
     }
 
+    @PutMapping("/{id}/disable")
+    public CV disable(@PathVariable long id) {
+        return cvService.disableCV(id);
+    }
+
+    @PutMapping("/{id}/enable")
+    public CV enable(@PathVariable long id) {
+        return cvService.enableCV(id);
+    }
+
     @DeleteMapping("{id}")
     public void delete(@PathVariable long id) {
         cvService.delete(id);
@@ -63,6 +73,5 @@ public class CVRestController {
     public CV unblock(@PathVariable long id) {
         return cvService.unblockCV(id);
     }
-
 
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegistrationPage = () => {
+const RegistrationContainer = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const RegistrationPage = () => {
     )
 };
 
-export default RegistrationPage;
+export default RegistrationContainer;

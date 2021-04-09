@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_REST_URL} from "../../utils/AppUtil";
+import {BASE_REST_URL} from "../utils/AppUtil";
 
 const BASE_REST_URL_WITH_USERS = `${BASE_REST_URL}/users`;
 
@@ -17,4 +17,8 @@ export const addUser = (user) => {
 
 export const getCurrentUser = () => {
     return axios.get(`${BASE_REST_URL_WITH_USERS}/current`)
+}
+
+export const updateProfile = (profileRequest) => {
+    return axios.put(`${BASE_REST_URL_WITH_USERS}/profile`, profileRequest)
 }

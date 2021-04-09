@@ -47,6 +47,7 @@ public class CVServiceImpl implements CVService {
                 .experiences(experienceRepository.findByIds(cvRequest.experiences))
                 .user(userRepository.getOne(securityUtil.getCurrentUserId()))
                 .blocked(false)
+                .disabled(false)
                 .build();
 
         return cvRepository.save(cv);
@@ -96,6 +97,26 @@ public class CVServiceImpl implements CVService {
     public CV unblockCV(long id) {
         CV cv = cvRepository.getOne(id);
         cv.setBlocked(false);
+        return cvRepository.save(cv);
+    }
+
+    @Override
+    public CV disableCV(long id) {
+        CV cv = cvRepository.getOne(id);
+        if (cv.getUser().getId() != securityUtil.getCurrentUserId()) {
+            throw new RuntimeException("different user");
+        }
+        cv.setDisabled(true);
+        return cvRepository.save(cv);
+    }
+
+    @Override
+    public CV enableCV(long id) {
+        CV cv = cvRepository.getOne(id);
+        if (cv.getUser().getId() != securityUtil.getCurrentUserId()) {
+            throw new RuntimeException("different user");
+        }
+        cv.setDisabled(false);
         return cvRepository.save(cv);
     }
 }
