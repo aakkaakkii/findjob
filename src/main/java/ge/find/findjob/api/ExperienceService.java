@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ExperienceService {
     List<Experience> loadUserExperience(long userId);
+    List<Experience> loadCurrentUserExperience();
     Experience get(long id);
     Experience add(ExperienceRequestModel experienceRequest);
     Experience update(ExperienceRequestModel experienceRequest);

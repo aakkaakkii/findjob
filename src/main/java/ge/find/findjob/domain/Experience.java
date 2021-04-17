@@ -1,5 +1,6 @@
 package ge.find.findjob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,6 @@ public class Experience {
     private Date startDate;
     private Date endDate;
 
-    @ManyToOne
+    @ManyToOne()
     private User user;
 }

@@ -26,6 +26,11 @@ public class EducationRestController {
         return educationService.loadUserEducation(id);
     }
 
+    @GetMapping("/currentUser")
+    public List<Education> loadUserEducations() {
+        return educationService.loadCurrentUserEducation();
+    }
+
     @PostMapping
     public Education add(@RequestBody EducationRequestModel requestModel) {
         return educationService.add(requestModel);

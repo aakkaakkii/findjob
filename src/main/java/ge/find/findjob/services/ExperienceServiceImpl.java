@@ -20,6 +20,11 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public List<Experience> loadUserExperience(long userId) {
+        return experienceRepository.findByUserId(userId);
+    }
+
+    @Override
+    public List<Experience> loadCurrentUserExperience() {
         return experienceRepository.findByUserId(securityUtil.getCurrentUserId());
     }
 

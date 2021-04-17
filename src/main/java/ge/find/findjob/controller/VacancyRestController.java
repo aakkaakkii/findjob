@@ -27,7 +27,7 @@ public class VacancyRestController {
     }
 
     @GetMapping("/organisation/{id}")
-    public List<Vacancy> loadByUserId(@PathVariable long id) {
+    public List<Vacancy> loadByOrganisationId(@PathVariable long id) {
         return vacancyService.loadByOrganisationId(id);
     }
 

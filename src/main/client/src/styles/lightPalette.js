@@ -6,6 +6,7 @@ const lightPalette = {
     oppositePlainTextColor: "#ffffff",
     plainTextColor: "rgb(0,0,0)",
     plainTextColorLight: "rgba(0,0,0,0.7)",
+    backgroundColor: "#ffffff",
     palette: {
         primary: {
             light: '#B4B0FF',

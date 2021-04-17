@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface EducationService {
     List<Education> loadUserEducation(long userId);
+    List<Education> loadCurrentUserEducation();
     Education get(long id);
     Education add(EducationRequestModel educationRequest);
     Education update(EducationRequestModel educationRequest);

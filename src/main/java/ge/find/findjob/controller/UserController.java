@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PutMapping("/profile")
-    public User updateProfile(UserProfileRequest userProfileRequest) {
+    public User updateProfile(@RequestBody UserProfileRequest userProfileRequest) {
         return userService.updateProfile(userProfileRequest);
     }
 

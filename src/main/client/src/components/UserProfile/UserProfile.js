@@ -1,43 +1,61 @@
 import {makeStyles} from "@material-ui/core/styles";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Box, Button, TextField} from "@material-ui/core";
-import useCurrentUser from "../../hoc/user/useCurrentUser";
+import ExperienceContainer from "../../containers/userProfile/ExperienceContainer";
+import EducationContainer from "../../containers/userProfile/EducationContainer";
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        width: "100%",
+        display: "flex",
+        alignItems: "center"
+    },
+    title: {
+      fontSize: theme.title1FontSize,
+        marginBottom: "30px"
+    },
+    dataPanel: {
+        marginTop: "40px",
+        minWidth: "500px",
+    }
 }));
 
-const UserProfile = ({updateUser, educations, experiences}) => {
+const UserProfile = ({updateUserProfile, userProfile, educations}) => {
     const classes = useStyles();
-    const [formUser, setFormUser] = useState({});
-    const {userNickname} = useCurrentUser();
+    const [formUserProfile, setFormUserProfile] = useState({
+        nickname: ""
+    });
     const {t} = useTranslation();
 
-    const detectUserChange = (e) => {
-        // let tmpUser = {...user};
-        // tmpUser[e.target.name] = e.target.value;
-        // setUser(tmpUser);
+    useEffect(() => {
+        setFormUserProfile(userProfile);
+    }, [userProfile]);
+
+    const detectUserProfileChange = (e) => {
+        let tmpUser = {...formUserProfile};
+        tmpUser[e.target.name] = e.target.value;
+        setFormUserProfile(tmpUser);
     }
 
     return (
         <Box display={"flex"} flexDirection={"column"} className={classes.root}>
-
-            <div>profile</div>
-            <div>
+            <div className={classes.title}>{t("profile")}</div>
+            <Box display={"flex"}>
                 <TextField
                     label="nickname"
                     name="nickname"
-                    value={userNickname}
-                    onChange={detectUserChange}/>
-                <Button>save</Button>
-            </div>
-            <div>
-                experience
-            </div>
-            <div>
-                education
-            </div>
+                    value={formUserProfile.nickname}
+                    onChange={detectUserProfileChange}/>
+                <Button variant={"contained"} color={"primary"}
+                        onClick={() => updateUserProfile(formUserProfile)}>{t('save')}</Button>
+            </Box>
+            <Box className={classes.dataPanel}>
+                <ExperienceContainer/>
+            </Box>
+            <Box className={classes.dataPanel}>
+                <EducationContainer/>
+            </Box>
         </Box>
 
     )

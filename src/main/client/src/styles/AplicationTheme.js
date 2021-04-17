@@ -1,5 +1,6 @@
 import darkPalette from "./darkPalette";
 import lightPalette from "./lightPalette";
+import {fade} from "@material-ui/core/styles/colorManipulator";
 
 const theme = (mode) => {
     let themePallet = mode === 'dark' ? darkPalette : lightPalette;
@@ -10,32 +11,25 @@ const theme = (mode) => {
         primaryColorLight: themePallet.primaryColorLight,
         plainTextColor: themePallet.plainTextColor,
         plainTextColorLight: themePallet.plainTextColorLight,
+        backgroundColor: themePallet.backgroundColor,
         title1FontSize: "36px",
         title2FontSize: "28px",
+
+        icon: {
+            color: themePallet.palette.primary.dark,
+            cursor: "pointer",
+            padding: 2,
+            "&:hover": {
+                backgroundColor: fade(themePallet.palette.primary.light, 0.3),
+                borderRadius: "50%"
+            }
+        },
 
         palette: {
             type: palletMode,
             primary: themePallet.palette.primary,
             secondary: themePallet.palette.secondary,
-            // primary: themePalette(color, mode).palette.primary,
-            // secondary: themePalette(color, mode).palette.secondary,
-          /*  action: {
-                hover: mode === "dark" ? "rgba(80,80,80, 0.9)" : "rgba(80,80,80, 0.05)",
-                hoverOpacity: 0.05,
-            },*/
         },
-
-
-        /*    palette: {
-                primary: {
-                    // Purple and green play nicely together.
-                    main: purple[500],
-                },
-                secondary: {
-                    // This is green.A700 as hex.
-                    main: '#11cb5f',
-                },
-            },*/
     }
 }
 

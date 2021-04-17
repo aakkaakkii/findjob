@@ -7,16 +7,20 @@ export const getExperience = (id) => {
     return axios.get(`${BASE_REST_URL_WITH_EXPERIENCES}/${id}`);
 }
 
-export const loadUserExperiences = () => {
-    return axios.get(`${BASE_REST_URL_WITH_EXPERIENCES}/user/${id}`);
+export const loadUserExperiences = (userId) => {
+    return axios.get(`${BASE_REST_URL_WITH_EXPERIENCES}/user/${userId}`);
+}
+
+export const loadCurrentUserExperiences = () => {
+    return axios.get(`${BASE_REST_URL_WITH_EXPERIENCES}/currentUser`);
 }
 
 export const addExperience = (experience) => {
     return axios.post(`${BASE_REST_URL_WITH_EXPERIENCES}`, experience);
 }
 
-export const updateExperience = (experience) => {
-    return axios.put(`${BASE_REST_URL_WITH_EXPERIENCES}`, experience);
+export const updateExperience = (experience, id) => {
+    return axios.put(`${BASE_REST_URL_WITH_EXPERIENCES}/${id}`, experience);
 }
 
 export const adminDeleteExperience = (id) => {

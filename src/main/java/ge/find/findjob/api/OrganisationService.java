@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface OrganisationService {
     List<Organisation> load();
+    List<Organisation> loadCurrentUserExperience();
     Organisation get(long id);
     Organisation add(OrganisationRequestModel organisationRequestModel);
     Organisation update(OrganisationRequestModel organisationRequestModel);

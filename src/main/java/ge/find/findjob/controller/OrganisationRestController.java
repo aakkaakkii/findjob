@@ -1,6 +1,7 @@
 package ge.find.findjob.controller;
 
 import ge.find.findjob.api.OrganisationService;
+import ge.find.findjob.domain.Experience;
 import ge.find.findjob.domain.Organisation;
 import ge.find.findjob.model.OrganisationRequestModel;
 import ge.find.findjob.util.ApiConstants;
@@ -26,6 +27,10 @@ public class OrganisationRestController {
         return organisationService.get(id);
     }
 
+    @GetMapping("/currentUser")
+    public List<Organisation> loadCurrentUserExperiences() {
+        return organisationService.loadCurrentUserExperience();
+    }
     @PostMapping
     public Organisation add(@RequestBody OrganisationRequestModel requestModel) {
         return organisationService.add(requestModel);

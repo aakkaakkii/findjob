@@ -20,6 +20,11 @@ public class EducationServiceImpl implements EducationService {
 
     @Override
     public List<Education> loadUserEducation(long userId) {
+        return educationRepository.findByUserId(userId);
+    }
+
+    @Override
+    public List<Education> loadCurrentUserEducation() {
         return educationRepository.findByUserId(securityUtil.getCurrentUserId());
     }
 

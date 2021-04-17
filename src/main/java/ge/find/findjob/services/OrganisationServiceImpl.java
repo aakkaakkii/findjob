@@ -24,6 +24,11 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
+    public List<Organisation> loadCurrentUserExperience() {
+        return organisationRepository.findByUserId(securityUtil.getCurrentUserId());
+    }
+
+    @Override
     public Organisation get(long id) {
         return organisationRepository.getOne(id);
     }

@@ -7,7 +7,6 @@ import ge.find.findjob.model.UserProfileRequest;
 import ge.find.findjob.repo.UserRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

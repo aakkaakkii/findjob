@@ -27,6 +27,11 @@ public class ExperienceRestController {
         return experienceService.loadUserExperience(id);
     }
 
+    @GetMapping("/currentUser")
+    public List<Experience> loadCurrentUserExperiences() {
+        return experienceService.loadCurrentUserExperience();
+    }
+
     @PostMapping
     public Experience add(@RequestBody ExperienceRequestModel requestModel) {
         return experienceService.add(requestModel);

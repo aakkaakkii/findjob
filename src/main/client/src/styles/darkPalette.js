@@ -4,6 +4,7 @@ const darkPalette = {
     plainTextColor: "#fff",
     plainTextColorLight: "#fff",
     oppositePlainTextColor: "#ffffff",
+    backgroundColor: "#000000",
     palette: {
         primary: {
             light: '#fff3e0',
