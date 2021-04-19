@@ -2,6 +2,7 @@ package ge.find.findjob.controller;
 
 import ge.find.findjob.api.VacancyService;
 import ge.find.findjob.domain.Vacancy;
+import ge.find.findjob.domain.VacancyType;
 import ge.find.findjob.model.VacancyRequestModel;
 import ge.find.findjob.util.ApiConstants;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class VacancyRestController {
     @GetMapping("/organisation/{id}")
     public List<Vacancy> loadByOrganisationId(@PathVariable long id) {
         return vacancyService.loadByOrganisationId(id);
+    }
+
+    @GetMapping("/vacancyTypes")
+    public List<VacancyType> loadVacancyTypes() {
+        return vacancyService.loadVacancyTypes();
     }
 
     @PostMapping

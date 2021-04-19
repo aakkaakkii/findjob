@@ -8,8 +8,6 @@ import EducationContainer from "../../containers/userProfile/EducationContainer"
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
-        display: "flex",
-        alignItems: "center"
     },
     title: {
       fontSize: theme.title1FontSize,
@@ -39,7 +37,7 @@ const UserProfile = ({updateUserProfile, userProfile, educations}) => {
     }
 
     return (
-        <Box display={"flex"} flexDirection={"column"} className={classes.root}>
+        <Box display={"flex"} flexDirection={"column"} alignItems={"center"} className={classes.root}>
             <div className={classes.title}>{t("profile")}</div>
             <Box display={"flex"}>
                 <TextField

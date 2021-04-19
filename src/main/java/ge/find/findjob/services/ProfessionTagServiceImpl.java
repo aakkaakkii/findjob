@@ -1,6 +1,6 @@
 package ge.find.findjob.services;
 
-import ge.find.findjob.api.ProfessionService;
+import ge.find.findjob.api.ProfessioTagnService;
 import ge.find.findjob.domain.ProfessionTag;
 import ge.find.findjob.repo.ProfessionRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProfessionServiceImpl implements ProfessionService {
+public class ProfessionTagServiceImpl implements ProfessioTagnService {
     private final ProfessionRepository professionRepository;
 
     @Override

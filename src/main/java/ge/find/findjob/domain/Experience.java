@@ -24,5 +24,6 @@ public class Experience {
     private Date endDate;
 
     @ManyToOne()
+    @JsonIgnoreProperties({"password", "email"})
     private User user;
 }

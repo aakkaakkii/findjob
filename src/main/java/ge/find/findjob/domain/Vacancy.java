@@ -1,5 +1,6 @@
 package ge.find.findjob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,5 +30,6 @@ public class Vacancy {
     private List<ProfessionTag> professionTags;
     @ManyToOne
     @JoinColumn(name = "organisation_id")
+    @JsonIgnoreProperties("vacancies")
     private Organisation organisation;
 }

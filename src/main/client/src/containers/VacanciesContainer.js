@@ -1,63 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import VacancyShort from "../components/Vaccancy/VacancyShort";
-
-const useStyles = makeStyles((theme) => ({
-    root: {},
-    vacancies: {
-        display: "grid",
-        gridTemplateColumns: "0.4fr",
-
-        justifyContent: "center"
-    }
-}));
+import {loadVacancies} from "../api/vacancyApi";
+import VacanciesPage from "../components/Vaccancy/VacanciesPage";
 
 
 const VacanciesContainer = () => {
     const [vacancies, setVacancies] = useState([]);
-    const classes = useStyles();
 
     useEffect(() => {
-        setVacancies(vacancyList);
+        fetchData();
     }, []);
 
+    const fetchData = async () => {
+        const res = await loadVacancies();
+        setVacancies(res.data);
+    }
+
     return (
-        <div>
-            <div className={classes.vacancies}>
-                <div> Hot Jobs</div>
-                {vacancies.map(vacancy =>
-                    <VacancyShort
-                        key={vacancy.id}
-                        id={vacancy.id}
-                        companyName={vacancy.name}
-                        date={vacancy.date}
-                        title={vacancy.title}/>)}
-            </div>
-        </div>
+        <VacanciesPage vacancies={vacancies}/>
     )
 };
-
-
-const vacancyList = [
-    {
-        id: 1,
-        title: "Frontend Development",
-        date: "2019",
-        name: "FACEBOOK, INC."
-    },
-    {
-        id: 2,
-        title: "Open Source Interactive Developer",
-        date: "2019",
-        name: "FACEBOOK, INC."
-    },
-    {
-        id: 3,
-        title: "Full Stack Developer",
-        date: "2019",
-        name: "FACEBOOK, INC."
-    }
-]
-
 
 export default VacanciesContainer;

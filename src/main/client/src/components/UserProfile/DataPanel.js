@@ -1,6 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {useState} from "react";
-import {useTranslation} from "react-i18next";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import FormWindow from "../FormWindow";
 import Box from "@material-ui/core/Box";
@@ -11,12 +10,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: theme.title2FontSize,
       color: theme.plainTextColorLight
     },
-    item: {
-        padding: "20px 10px",
-        borderBottom: `1px solid ${theme.palette.primary.main}`
-    },
     header: {
-        padding: "10px 10px",
+        // padding: "10px 10px",
     },
     icons: {
         ...theme.icon
@@ -39,7 +34,6 @@ const DataPanel =
      }) => {
         const classes = useStyles();
         const [open, setOpen] = useState(false);
-        const {t} = useTranslation();
 
         const onAddExperience = () => {
             setOpen(true);
@@ -54,7 +48,7 @@ const DataPanel =
             <Box className={classes.root}>
                 <Box display={"flex"} justifyContent={"space-between"} className={classes.header} >
                     <div className={classes.title}>
-                        {t(title)}
+                        {title}
                     </div>
                     <AddCircleOutlineIcon
                         className={classes.icons}
@@ -62,10 +56,10 @@ const DataPanel =
                     />
                 </Box>
                 <div>
-                    {listData.map(d => dataRenderer(d, onEdit, deleteListItem))}
+                    {listData && listData.map(d => dataRenderer(d, onEdit, deleteListItem))}
                 </div>
                 <FormWindow
-                    title={t(formTitle)}
+                    title={formTitle}
                     dataDescription={formDataDescription}
                     data={formData}
                     setData={setFormData}

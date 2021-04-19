@@ -7,6 +7,7 @@ import {
     loadCurrentUserOrganisations,
     updateOrganisation
 } from "../../api/organisationApi";
+import {useTranslation} from "react-i18next";
 
 
 const OrganisationContainer = () => {
@@ -21,7 +22,7 @@ const OrganisationContainer = () => {
         website: "",
     });
     const {organisationRenderer} = usePanelDataRenderers();
-
+    const {t} = useTranslation();
 
     useEffect(() => {
         fetchOrganisations();
@@ -50,7 +51,7 @@ const OrganisationContainer = () => {
             fetchOrganisations();
         } else {
             let res = await addOrganisation(formOrganisation);
-            setOrganisations([res.data, ...organisations])
+            setOrganisations([...organisations, res.data])
         }
     }
 
@@ -74,7 +75,7 @@ const OrganisationContainer = () => {
         {
             title: "description",
             dataIndex: "description",
-            type: "string"
+            type: "text"
         },
         {
             title: "address",
@@ -100,8 +101,8 @@ const OrganisationContainer = () => {
 
     return (
         <DataPanel
-            title={"organisations"}
-            formTitle={"add organisation"}
+            title={t("organisations")}
+            formTitle={t("add organisation")}
             listData={organisations}
             formData={formOrganisation}
             formDataDescription={dataDescription}

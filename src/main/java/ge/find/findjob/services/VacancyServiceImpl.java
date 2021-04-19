@@ -2,6 +2,7 @@ package ge.find.findjob.services;
 
 import ge.find.findjob.api.VacancyService;
 import ge.find.findjob.domain.Vacancy;
+import ge.find.findjob.domain.VacancyType;
 import ge.find.findjob.model.VacancyRequestModel;
 import ge.find.findjob.repo.OrganisationRepository;
 import ge.find.findjob.repo.ProfessionRepository;
@@ -10,6 +11,7 @@ import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +36,11 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public Vacancy get(long id) {
         return vacancyRepository.getOne(id);
+    }
+
+    @Override
+    public List<VacancyType> loadVacancyTypes() {
+        return Arrays.asList(VacancyType.values());
     }
 
     @Override

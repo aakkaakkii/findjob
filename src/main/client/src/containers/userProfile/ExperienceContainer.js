@@ -8,6 +8,7 @@ import {
 } from "../../api/experienceApi";
 import DataPanel from "../../components/UserProfile/DataPanel";
 import usePanelDataRenderers from "../../hooks/usePanelDataRenderers";
+import {useTranslation} from "react-i18next";
 
 const ExperienceContainer = () => {
     const [experiences, setExperiences] = useState([]);
@@ -19,6 +20,7 @@ const ExperienceContainer = () => {
         endDate: null,
     });
     const {experienceRenderer} = usePanelDataRenderers();
+    const {t} = useTranslation();
 
     useEffect(() => {
         fetchExperience();
@@ -42,10 +44,9 @@ const ExperienceContainer = () => {
     const submit = async () => {
         if(formExperience.id) {
             await updateExperience(formExperience, formExperience.id);
-            fetchExperience();
         } else {
             let res = await addExperience(formExperience);
-            setExperiences([res.data, ...experiences])
+            setExperiences([...experiences, res.data])
         }
     }
 
@@ -69,7 +70,7 @@ const ExperienceContainer = () => {
         {
             title: "description",
             dataIndex: "description",
-            type: "string"
+            type: "text"
         },
         {
             title: "startDate",
@@ -85,8 +86,8 @@ const ExperienceContainer = () => {
 
     return (
         <DataPanel
-            title={"experiences"}
-            formTitle={"add experience"}
+            title={t("experiences")}
+            formTitle={t("add experience")}
             listData={experiences}
             formData={formExperience}
             formDataDescription={dataDescription}

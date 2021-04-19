@@ -1,5 +1,6 @@
 package ge.find.findjob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,5 +34,6 @@ public class CV {
     @OneToMany
     private List<Education> educations;
     @ManyToOne
+    @JsonIgnoreProperties({"password", "email"})
     private User user;
 }

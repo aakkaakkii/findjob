@@ -1,9 +1,7 @@
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import {Box, Grid, Paper} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 import {HashRouter as Router, Link, Route, Switch, useLocation} from "react-router-dom";
-import ThemeWrapper from "../../styles/ThemeWrapper";
-import UserCVsContainer from "../../containers/UserCVsContainer";
 import UserProfileContainer from "../../containers/userProfile/UserProfileContainer";
 import CVContainer from "../../containers/userProfile/CVContainer";
 import OrganisationContainer from "../../containers/userProfile/OrganisationContainer";
@@ -11,7 +9,6 @@ import OrganisationContainer from "../../containers/userProfile/OrganisationCont
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: 20,
-
     },
     left: {
         borderRight: `1px solid ${theme.palette.primary.main}`
@@ -24,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     selectedLink: {
         color: "#ffffff",
         backgroundColor: theme.palette.primary.main
+    },
+    organisation: {
+        margin: "10px"
     }
 }));
 
@@ -61,7 +61,11 @@ const UserProfilePage = ({url}) => {
                         <Route exact path={`${url}/`} render={() => <UserProfileContainer/>}/>
                         <Route exact path={`${url}/password`} render={() => <div>12</div>}/>
                         <Route exact path={`${url}/cv`} render={() => <CVContainer/>}/>
-                        <Route exact path={`${url}/organisation`} render={() => <OrganisationContainer/>}/>
+                        <Route exact path={`${url}/organisation`} render={() =>
+                            <div className={classes.organisation}>
+                                <OrganisationContainer/>
+                            </div>
+                        }/>
                     </Switch>
                 </Router>
             </Grid>

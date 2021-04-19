@@ -4,7 +4,7 @@ import ge.find.findjob.domain.ProfessionTag;
 
 import java.util.List;
 
-public interface ProfessionService {
+public interface ProfessioTagnService {
     List<ProfessionTag> load();
     ProfessionTag get(long id);
     ProfessionTag getByTitle(String title);

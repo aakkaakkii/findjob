@@ -2,7 +2,6 @@ package ge.find.findjob.model;
 
 import ge.find.findjob.domain.VacancyType;
 
-import java.util.Date;
 import java.util.List;
 
 public class VacancyRequestModel {

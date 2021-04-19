@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import UserMenu from "./UserMenu";
+import useCurrentUser from "../../hoc/user/useCurrentUser";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const classes = useStyles();
+    const {isUserLoggedIn} = useCurrentUser();
 
     return (
         <div className={classes.root}>
@@ -52,6 +54,11 @@ const Header = () => {
                 </li>
                 <li>
                     <UserMenu/>
+                </li>
+                <li>
+                    {
+                        !isUserLoggedIn && <Link className={classes.navbarLink} to="/login">login</Link>
+                    }
                 </li>
             </ul>
         </div>

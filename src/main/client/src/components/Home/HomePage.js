@@ -36,8 +36,9 @@ const HomePage = ({vacancies}) => {
                     <VacancyShort
                         key={vacancy.id}
                         id={vacancy.id}
-                        companyName={vacancy.name}
-                        date={vacancy.date}
+                        organisationName={vacancy.organisation.title}
+                        organisationId={vacancy.organisation.id}
+                        date={vacancy.creationTime}
                         title={vacancy.title}/>)}
             </div>
         </div>

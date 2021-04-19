@@ -12,11 +12,8 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "500px"
     },
     item: {
-        padding: "20px 10px",
-        borderBottom: `1px solid ${theme.palette.primary.main}`
-    },
-    header: {
-        padding: "10px 10px",
+        padding: "20px 0",
+        borderBottom: `1px solid ${theme.palette.primary.main}`,
     },
     icons: {
         ...theme.icon
@@ -25,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "20px",
         fontWeight: 700,
         marginBottom: 8
+    },
+    vacanciesWrapper: {
+        "& $item": {
+            width: "500px",
+        },
     }
 }));
 
@@ -34,10 +36,12 @@ const usePanelDataRenderers = () => {
 
     const experienceRenderer = (d, onEdit, onDelete) => {
         return (
-            <Box key={d.id}  display={"flex"} justifyContent={"space-between"} className={classes.item}>
+            <Box key={d.id} display={"flex"} justifyContent={"space-between"} className={classes.item}>
                 <Box>
                     <div className={classes.title}>{d.title}</div>
-                    <div>{d.description}</div>
+                    <div>
+                        {d.description && d.description.split("\n").map(description => <div>{description}</div>)}
+                    </div>
                     {
                         d.startDate &&
                         <div>{format(Date.parse(d.startDate), "MM yyyy")}
@@ -54,7 +58,7 @@ const usePanelDataRenderers = () => {
 
     const educationRenderer = (d, onEdit, onDelete) => {
         return (
-            <Box key={d.id}  display={"flex"} justifyContent={"space-between"} className={classes.item}>
+            <Box key={d.id} display={"flex"} justifyContent={"space-between"} className={classes.item}>
                 <Box>
                     <div className={classes.title}>{d.school}</div>
                     <div>{d.degree}</div>
@@ -89,9 +93,13 @@ const usePanelDataRenderers = () => {
                         <DeleteForeverIcon className={classes.icons} onClick={() => onDelete(d.id)}/>
                     </Box>
                 </Box>
-                <Box>
-                    <Box display={"flex"} justifyContent={"space-between"} className={classes.header} >
-                        <VacancyContainer organisationId={d.id} />
+                <Box
+                    display={"flex"}
+                    flexDirection={"column"}
+                    alignItems={"flex-end"}
+                    className={classes.vacanciesWrapper}>
+                    <Box display={"flex"} justifyContent={"space-between"}>
+                        <VacancyContainer organisationId={d.id}/>
                     </Box>
                 </Box>
             </Box>
@@ -104,9 +112,6 @@ const usePanelDataRenderers = () => {
                 <Box display={"flex"} justifyContent={"space-between"}>
                     <Box>
                         <div className={classes.title}>{d.title}</div>
-                        <div>{d.description}</div>
-                        <div>{d.salary}</div>
-                        <div>{d.vacancyType}</div>
                     </Box>
                     <Box display={"flex"} flexDirection={"column"}>
                         <EditIcon className={classes.icons} onClick={() => onEdit(d.id)}/>

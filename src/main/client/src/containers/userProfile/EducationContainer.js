@@ -3,6 +3,7 @@ import {addEducation, deleteEducation, getEducation, loadCurrentUserEducations} 
 import DataPanel from "../../components/UserProfile/DataPanel";
 import usePanelDataRenderers from "../../hooks/usePanelDataRenderers";
 import {updateExperience} from "../../api/experienceApi";
+import {useTranslation} from "react-i18next";
 
 
 const EducationContainer = () => {
@@ -15,7 +16,7 @@ const EducationContainer = () => {
         endDate: null,
     });
     const {educationRenderer} = usePanelDataRenderers();
-
+    const {t} = useTranslation();
 
     useEffect(() => {
         fetchEducation();
@@ -42,7 +43,7 @@ const EducationContainer = () => {
             fetchEducation();
         } else {
             let res = await addEducation(formEducation);
-            setEducations([res.data, ...educations])
+            setEducations([...educations, res.data])
         }
     }
 
@@ -82,8 +83,8 @@ const EducationContainer = () => {
 
     return (
         <DataPanel
-            title={"educations"}
-            formTitle={"add educations"}
+            title={t("educations")}
+            formTitle={t("add educations")}
             listData={educations}
             formData={formEducation}
             formDataDescription={dataDescription}

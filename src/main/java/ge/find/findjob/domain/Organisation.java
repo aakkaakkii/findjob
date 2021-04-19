@@ -1,5 +1,6 @@
 package ge.find.findjob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +27,11 @@ public class Organisation {
     private boolean blocked;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "organisation")
+    @JsonIgnoreProperties("organisation")
     private List<Vacancy> vacancies;
 
     @ManyToOne
+    @JsonIgnoreProperties({"password", "email"})
     private User user;
 
 }

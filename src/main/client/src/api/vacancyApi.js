@@ -15,6 +15,10 @@ export const loadOrganisationVacancies = (id) => {
     return axios.get(`${BASE_REST_URL_WITH_VACANCY}/organisation/${id}`);
 }
 
+export const loadVacancyTypes = () => {
+    return axios.get(`${BASE_REST_URL_WITH_VACANCY}/vacancyTypes`);
+}
+
 export const addVacancy = (vacancy) => {
     return axios.post(`${BASE_REST_URL_WITH_VACANCY}`, vacancy);
 }

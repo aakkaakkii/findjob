@@ -16,6 +16,7 @@ import UserVacanciesContainer from "./containers/UserVacnciesContainer";
 import CreateCVContainer from "./containers/CreateCVContainer";
 import CreateVacancyContainer from "./containers/CreateVacancyContainer";
 import UserProfilePage from "./components/UserProfile/UserProfilePage";
+import OrganisationContainer from "./containers/OrganisationContainer";
 
 const Application = () => {
 
@@ -36,6 +37,7 @@ const Application = () => {
                             <Route exact path={`/userVacancies`} render={() => <UserVacanciesContainer/>}/>
                             <Route exact path={`/createCV`} render={() => <CreateCVContainer/>}/>
                             <Route exact path={`/createVacancy`} render={() => <CreateVacancyContainer/>}/>
+                            <Route exact path={`/organisation/:id`} render={() => <OrganisationContainer/>}/>
                             <Route path={`/userProfile`}  render={({match: {url}}) => <UserProfilePage url={url}/>}/>
                         </Switch>
                         <Footer/>

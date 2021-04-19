@@ -1,6 +1,7 @@
 package ge.find.findjob.api;
 
 import ge.find.findjob.domain.Vacancy;
+import ge.find.findjob.domain.VacancyType;
 import ge.find.findjob.model.VacancyRequestModel;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface VacancyService {
     List<Vacancy> load();
     List<Vacancy> loadByOrganisationId(long id);
     Vacancy get(long id);
+    List<VacancyType> loadVacancyTypes();
     Vacancy add(VacancyRequestModel vacancyRequestModel);
     Vacancy update(VacancyRequestModel vacancyRequestModel);
     void delete(long id);

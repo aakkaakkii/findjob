@@ -1,7 +1,16 @@
 import React, {useEffect, useState} from "react";
 import DataPanel from "../../components/UserProfile/DataPanel";
 import usePanelDataRenderers from "../../hooks/usePanelDataRenderers";
-import {addVacancy, deleteVacancy, getVacancy, loadOrganisationVacancies, updateVacancy} from "../../api/vacancyApi";
+import {
+    addVacancy,
+    deleteVacancy,
+    getVacancy,
+    loadOrganisationVacancies,
+    loadVacancyTypes,
+    updateVacancy
+} from "../../api/vacancyApi";
+import {useTranslation} from "react-i18next";
+import {loadProfessionTags} from "../../api/vacancyTagApi";
 
 
 const VacancyContainer = ({organisationId}) => {
@@ -13,18 +22,35 @@ const VacancyContainer = ({organisationId}) => {
         salary: "",
         vacancyType: "",
         professionTags: [],
+        organisationId: organisationId
     });
+    const [professionTags, setProfessionTags] = useState([]);
+    const [vacancyTypes, setVacancyTypes] = useState([]);
     const {vacancyRenderer} = usePanelDataRenderers();
-
+    const {t} = useTranslation();
 
     useEffect(() => {
         fetchVacancies(organisationId);
-    },[organisationId]);
+        fetchVacancyTypes();
+        fetchProfessionTags();
+    }, [organisationId]);
 
     const fetchVacancies = async (organisationId) => {
         const res = await loadOrganisationVacancies(organisationId);
         setVacancies(res.data)
     };
+
+    const fetchVacancyTypes = async () => {
+        const res = await loadVacancyTypes();
+        const data = res.data;
+        setVacancyTypes(data.map(d => ({data: d, label: t(d)})));
+    }
+
+    const fetchProfessionTags = async () => {
+        const res = await loadProfessionTags();
+        const data = res.data;
+        setProfessionTags(data.map(d => ({data: d.id, label: d.title})));
+    }
 
     const handleClose = () => {
         setFormVacancy({
@@ -34,17 +60,18 @@ const VacancyContainer = ({organisationId}) => {
             salary: "",
             vacancyType: "",
             professionTags: [],
+            organisationId: organisationId
         });
     };
 
     const submit = async () => {
-        if(formVacancy.id) {
+        formVacancy["organisationId"] = organisationId;
+        if (formVacancy.id) {
             await updateVacancy(formVacancy, formVacancy.id);
-            fetchVacancies(organisationId);
         } else {
             await addVacancy(formVacancy);
-            fetchVacancies(organisationId);
         }
+        fetchVacancies(organisationId);
     }
 
     const itemDelete = async (id) => {
@@ -54,7 +81,16 @@ const VacancyContainer = ({organisationId}) => {
 
     const editExperience = async (id) => {
         const res = await getVacancy(id);
-        setFormVacancy(res.data);
+        const data = res.data;
+        setFormVacancy({
+            id: data.id,
+            title: data.title,
+            description: data.description,
+            salary: data.salary,
+            vacancyType: data.vacancyType,
+            professionTags: data.professionTags && data.professionTags.map(d => d.id),
+            organisationId: organisationId
+        });
     }
 
 
@@ -67,7 +103,7 @@ const VacancyContainer = ({organisationId}) => {
         {
             title: "description",
             dataIndex: "description",
-            type: "string"
+            type: "text"
         },
         {
             title: "salary",
@@ -77,19 +113,25 @@ const VacancyContainer = ({organisationId}) => {
         {
             title: "vacancyType",
             dataIndex: "vacancyType",
-            type: "string"
+            type: "select",
+            data: vacancyTypes,
+            displayField: "data",
+            valueField: "data",
         },
         {
             title: "professionTags",
             dataIndex: "professionTags",
-            type: "string"
+            type: "multiSelect",
+            data: professionTags,
+            displayField: "label",
+            valueField: "data",
         },
     ]
 
     return (
         <DataPanel
-            title={"vacancies"}
-            formTitle={"add vacancies"}
+            title={t("vacancies")}
+            formTitle={t("add vacancies")}
             listData={vacancies}
             formData={formVacancy}
             formDataDescription={dataDescription}
