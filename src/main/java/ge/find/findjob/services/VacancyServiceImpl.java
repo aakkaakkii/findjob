@@ -9,6 +9,9 @@ import ge.find.findjob.repo.ProfessionRepository;
 import ge.find.findjob.repo.VacancyRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,8 +27,8 @@ public class VacancyServiceImpl implements VacancyService {
     private final SecurityUtil securityUtil;
 
     @Override
-    public List<Vacancy> load() {
-        return vacancyRepository.findAll();
+    public Page<Vacancy> load(int page, int limit) {
+        return vacancyRepository.findAll(PageRequest.of(page, limit, Sort.by(Sort.Direction.ASC, "creationTime")));
     }
 
     @Override

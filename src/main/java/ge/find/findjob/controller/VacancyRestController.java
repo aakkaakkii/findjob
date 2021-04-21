@@ -6,6 +6,7 @@ import ge.find.findjob.domain.VacancyType;
 import ge.find.findjob.model.VacancyRequestModel;
 import ge.find.findjob.util.ApiConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class VacancyRestController {
     private final VacancyService vacancyService;
 
     @GetMapping
-    public List<Vacancy> load() {
-        return vacancyService.load();
+    public Page<Vacancy> load(@RequestParam int page, @RequestParam int limit) {
+        return vacancyService.load(page, limit);
     }
 
     @GetMapping("{id}")

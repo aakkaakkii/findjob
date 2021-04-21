@@ -7,6 +7,7 @@ import ge.find.findjob.model.PasswordRequestModel;
 import ge.find.findjob.model.ResetPasswordRequestModel;
 import ge.find.findjob.repo.UserRepository;
 import ge.find.findjob.util.JwtTokenProvider;
+import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class PasswordServiceImpl implements PasswordService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SecurityUtil securityUtil;
 
     @Override
     public void resetPasswordRequest(ResetPasswordRequestModel resetPassword) {
@@ -38,12 +40,18 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     @Override
-    public User changePassword(ChangePasswordRequestModel resetPassword, String initiatorUsername) {
-        User user = userRepository.findByUsername(initiatorUsername);
+    public User changePassword(ChangePasswordRequestModel changePassword) {
+        User user = userRepository.getOne(securityUtil.getCurrentUserId());
 
-        if (user != null && passwordEncoder.matches(resetPassword.currentPassword, user.getPassword())
-                && resetPassword.newPassword.equals(resetPassword.repeatPassword)) {
-            user.setPassword(passwordEncoder.encode(resetPassword.newPassword));
+        if (user != null) {
+            if(!passwordEncoder.matches(changePassword.currentPassword, user.getPassword())) {
+                throw new RuntimeException("incorrect password");
+            }
+            if(!changePassword.newPassword.equals(changePassword.repeatPassword)) {
+                throw new RuntimeException(" password not matches");
+            }
+
+            user.setPassword(passwordEncoder.encode(changePassword.newPassword));
             userRepository.save(user);
         }
         return user;

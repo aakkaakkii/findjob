@@ -10,8 +10,8 @@ const MainContainer = () => {
     }, []);
 
     const fetchData = async () => {
-        const res = await loadVacancies();
-        setVacancies(res.data);
+        const res = await loadVacancies(0, 10);
+        setVacancies(res.data.content);
     }
 
     return (

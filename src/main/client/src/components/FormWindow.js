@@ -3,6 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Box, Button, Modal} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import FormElement from "./FormElement";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FormWindow = ({title, open, setOpen, dataDescription, data, setData, closeCallback, onSubmit}) => {
     const classes = useStyles();
+    const {t} = useTranslation();
 
     const handleClose = () => {
         if(typeof closeCallback === 'function') {
@@ -62,7 +64,7 @@ const FormWindow = ({title, open, setOpen, dataDescription, data, setData, close
                     variant={"contained"}
                     color={"primary"}
                     onClick={handleSave}
-                >save</Button>
+                >{t('save')}</Button>
             </div>
         </Modal>
     )

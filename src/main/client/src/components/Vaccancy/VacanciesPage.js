@@ -1,6 +1,7 @@
 import VacancyShort from "./VacancyShort";
-import React from "react";
+import React, {useRef} from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import Pagination from "../Pagination";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,13 +15,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const VacanciesPage = ({vacancies}) => {
+const VacanciesPage = ({vacancies, fetchData, currPage, totalPages}) => {
     const classes = useStyles();
+    const headRef = useRef();
+
+    const pageChangeCallback = () => {
+        headRef.current.scrollIntoView();
+    }
 
     return (
         <div>
             <div className={classes.vacancies}>
-                <div> Hot Jobs</div>
+                <div ref={headRef}> Hot Jobs</div>
                 {vacancies.map(vacancy =>
                     <VacancyShort
                         key={vacancy.id}
@@ -29,6 +35,12 @@ const VacanciesPage = ({vacancies}) => {
                         organisationId={vacancy.organisation.id}
                         date={vacancy.creationTime}
                         title={vacancy.title}/>)}
+                        <Pagination
+                            fetchData={fetchData}
+                            currPage={currPage}
+                            totalPages={totalPages}
+                            pageChangeCallback={pageChangeCallback}
+                        />
             </div>
         </div>
     )

@@ -7,8 +7,8 @@ export const getVacancy = (id) => {
     return axios.get(`${BASE_REST_URL_WITH_VACANCY}/${id}`);
 }
 
-export const loadVacancies = () => {
-    return axios.get(`${BASE_REST_URL_WITH_VACANCY}`);
+export const loadVacancies = (page, limit) => {
+    return axios.get(`${BASE_REST_URL_WITH_VACANCY}?page=${page}&limit=${limit}`);
 }
 
 export const loadOrganisationVacancies = (id) => {

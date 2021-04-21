@@ -3,11 +3,12 @@ package ge.find.findjob.api;
 import ge.find.findjob.domain.Vacancy;
 import ge.find.findjob.domain.VacancyType;
 import ge.find.findjob.model.VacancyRequestModel;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface VacancyService {
-    List<Vacancy> load();
+    Page<Vacancy> load(int page, int limit);
     List<Vacancy> loadByOrganisationId(long id);
     Vacancy get(long id);
     List<VacancyType> loadVacancyTypes();

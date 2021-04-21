@@ -5,6 +5,7 @@ import {HashRouter as Router, Link, Route, Switch, useLocation} from "react-rout
 import UserProfileContainer from "../../containers/userProfile/UserProfileContainer";
 import CVContainer from "../../containers/userProfile/CVContainer";
 import OrganisationContainer from "../../containers/userProfile/OrganisationContainer";
+import PasswordChangeContainer from "../../containers/userProfile/PasswordChangeContainer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,7 +60,7 @@ const UserProfilePage = ({url}) => {
                 <Router>
                     <Switch>
                         <Route exact path={`${url}/`} render={() => <UserProfileContainer/>}/>
-                        <Route exact path={`${url}/password`} render={() => <div>12</div>}/>
+                        <Route exact path={`${url}/password`} render={() => <PasswordChangeContainer/>}/>
                         <Route exact path={`${url}/cv`} render={() => <CVContainer/>}/>
                         <Route exact path={`${url}/organisation`} render={() =>
                             <div className={classes.organisation}>

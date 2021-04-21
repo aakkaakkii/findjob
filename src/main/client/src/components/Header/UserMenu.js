@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer'
     },
     langChangeSelect: {
+        marginLeft: "10px",
+        fontSize: "14px",
         border: "none",
         "&:focus": {
             backgroundColor: "transparent",
@@ -50,6 +52,22 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "inline",
         alignItems: "center",
+    },
+    navbarLink: {
+        color: theme.palette.primary.main,
+        fontWeight: "bold",
+        textDecoration: 'none',
+        "&:hover": {
+            color: theme.palette.primary.dark
+        }
+    },
+    userLogoInfoWrapper: {
+        marginLeft: "10px"
+    },
+    icon: {
+        fontSize: 20,
+        color: theme.palette.primary.main,
+        marginRight: "5px"
     }
 }));
 
@@ -97,9 +115,10 @@ const UserMenu = () => {
                                 <div className={classes.userLogo}>
                                     {userInitial()}
                                 </div>
-                                <div>
+                                <div className={classes.userLogoInfoWrapper}>
                                     <div>{nickname ? nickname : username}</div>
                                     <Link
+                                        className={classes.navbarLink}
                                         to={"/userProfile"}
                                         onClick={handleClose}
                                     >
@@ -112,6 +131,7 @@ const UserMenu = () => {
                                 <div>
                                     <div>
                                         <Link
+                                            className={classes.navbarLink}
                                             to={"/userCVs"}
                                             onClick={handleClose}>
                                             {t("cvs")}
@@ -119,9 +139,10 @@ const UserMenu = () => {
                                     </div>
                                     <div>
                                         <Link
-                                            to={"/userVacancies"}
+                                            className={classes.navbarLink}
+                                            to={"/userProfile/organisation"}
                                             onClick={handleClose}>
-                                            {t("Vaccinations")}
+                                            {t("organisations")}
                                         </Link>
                                     </div>
                                 </div>
@@ -132,11 +153,12 @@ const UserMenu = () => {
                     <div
                         className={`${classes.themeSwitch} ${classes.wrapper}`}
                         onClick={() => changeTheme()}>
-                        {theme === 'light' ? <Brightness4Icon/> : <Brightness7Icon/>}
+                        {theme === 'light' ? <Brightness4Icon className={classes.icon}/>
+                            : <Brightness7Icon className={classes.icon}/>}
                         {t('appearance')} {theme === 'light' ? t('light') : t('dark')}
                     </div>
                     <div className={classes.wrapper}>
-                        <LanguageIcon/>
+                        <LanguageIcon className={classes.icon}/>
                         <span>{t("language")}</span>
                         <Select
                             className={classes.langChangeSelect}

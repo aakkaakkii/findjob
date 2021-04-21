@@ -23,7 +23,7 @@ const Application = () => {
     return (
         <CurrentUserProvider>
             <ThemeWrapper>
-                <Paper style={{height: "100%", borderRadius: '0'}}>
+                <Paper style={{minHeight:"100vh", height: "100%", borderRadius: '0'}}>
                     <Router>
                         <Header/>
                         <Switch>
@@ -45,7 +45,6 @@ const Application = () => {
                 </Paper>
             </ThemeWrapper>
         </CurrentUserProvider>
-
     )
 };
 

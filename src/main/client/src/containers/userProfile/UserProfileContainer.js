@@ -5,7 +5,7 @@ import useCurrentUser from "../../hoc/user/useCurrentUser";
 
 const UserProfileContainer = () => {
     const [educations, setEducations] = useState([]);
-    const {nickname} = useCurrentUser();
+    const {nickname, changeUser} = useCurrentUser();
 
     useEffect(() => {
         fetchEducation();
@@ -16,7 +16,8 @@ const UserProfileContainer = () => {
     };
 
     const updateUserProfile = async (userProfile) => {
-        const res = await updateProfile(userProfile);
+        await updateProfile(userProfile);
+        changeUser()
     };
 
     return (

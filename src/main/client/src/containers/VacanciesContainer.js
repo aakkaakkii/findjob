@@ -6,19 +6,31 @@ import VacanciesPage from "../components/Vaccancy/VacanciesPage";
 
 
 const VacanciesContainer = () => {
+    const PAGE_LIMIT = 3;
     const [vacancies, setVacancies] = useState([]);
+    const [currPage, setCurrPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        fetchData();
+        fetchData(0);
     }, []);
 
-    const fetchData = async () => {
-        const res = await loadVacancies();
-        setVacancies(res.data);
+    const fetchData = async (page) => {
+        const res = await loadVacancies(page, PAGE_LIMIT);
+        const data = res.data;
+        // setVacancies([...data.content, ...data.content, ...data.content, ...data.content, ...data.content, ...data.content]);
+        setVacancies(data.content);
+        setCurrPage(data.number);
+        setTotalPages(data.totalPages);
     }
 
     return (
-        <VacanciesPage vacancies={vacancies}/>
+        <VacanciesPage
+            vacancies={vacancies}
+            fetchData={fetchData}
+            currPage={currPage}
+            totalPages={totalPages}
+        />
     )
 };
 

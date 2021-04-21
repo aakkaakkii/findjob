@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     companyName: {
         color: theme.palette.primary.main,
         marginRight: '5px',
+        textDecoration: "none",
+        fontWeight: "bold",
         cursor: "pointer",
         "&:hover": {
             color: theme.palette.primary.light,

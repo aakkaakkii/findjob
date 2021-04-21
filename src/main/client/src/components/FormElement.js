@@ -9,7 +9,6 @@ const FormElement = ({dataDescription, data, setData}) => {
     const {t} = useTranslation();
 
     const detectFormChange = (val, name) => {
-        console.log(val, name)
         let tmp = {...data};
         tmp[name] = val;
         setData(tmp);
@@ -74,6 +73,7 @@ const FormElement = ({dataDescription, data, setData}) => {
                     case "string":
                     default:
                         return <TextField
+                            type={d.fieldType ? d.fieldType : "string"}
                             key={d.dataIndex}
                             label={t(d.title)}
                             name={d.dataIndex}
