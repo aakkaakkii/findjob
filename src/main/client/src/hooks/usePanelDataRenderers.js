@@ -6,6 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import format from "date-fns/format";
 import {useTranslation} from "react-i18next";
 import VacancyContainer from "../containers/userProfile/VacancyContainer";
+import useWindow from "../hoc/Window/useWindow";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
 const usePanelDataRenderers = () => {
     const classes = useStyles();
     const {t} = useTranslation();
+    const {openConfirmWindow} = useWindow();
+
+    const onElementDelete = (onDelete) => {
+        openConfirmWindow("sure?", onDelete)
+    }
 
     const experienceRenderer = (d, onEdit, onDelete) => {
         return (
@@ -115,7 +121,8 @@ const usePanelDataRenderers = () => {
                     </Box>
                     <Box display={"flex"} flexDirection={"column"}>
                         <EditIcon className={classes.icons} onClick={() => onEdit(d.id)}/>
-                        <DeleteForeverIcon className={classes.icons} onClick={() => onDelete(d.id)}/>
+                        {/*<DeleteForeverIcon className={classes.icons} onClick={() => onDelete(d.id)}/>*/}
+                        <DeleteForeverIcon className={classes.icons} onClick={() => onElementDelete(() => onDelete(d.id))}/>
                     </Box>
                 </Box>
             </Box>

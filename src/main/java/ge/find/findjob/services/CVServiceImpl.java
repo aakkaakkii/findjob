@@ -7,6 +7,7 @@ import ge.find.findjob.repo.*;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -22,16 +23,19 @@ public class CVServiceImpl implements CVService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<CV> load() {
         return cvRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CV> loadByUserId(long id) {
         return cvRepository.findByUserId(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CV get(long id) {
         return cvRepository.getOne(id);
     }

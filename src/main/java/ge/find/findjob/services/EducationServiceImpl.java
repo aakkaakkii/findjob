@@ -8,6 +8,7 @@ import ge.find.findjob.repo.UserRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,16 +20,19 @@ public class EducationServiceImpl implements EducationService {
     private final SecurityUtil securityUtil;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Education> loadUserEducation(long userId) {
         return educationRepository.findByUserId(userId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Education> loadCurrentUserEducation() {
         return educationRepository.findByUserId(securityUtil.getCurrentUserId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Education get(long id) {
         return educationRepository.getOne(id);
     }

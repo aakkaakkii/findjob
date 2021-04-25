@@ -27,7 +27,7 @@ const EducationContainer = () => {
         setEducations(res.data)
     };
 
-    const handleClose = () => {
+    const clear = () => {
         setFormEducation({
             id: "",
             school: "",
@@ -45,6 +45,7 @@ const EducationContainer = () => {
             let res = await addEducation(formEducation);
             setEducations([...educations, res.data])
         }
+        clear();
     }
 
     const itemDelete = async (id) => {
@@ -90,7 +91,7 @@ const EducationContainer = () => {
             formDataDescription={dataDescription}
             setFormData={setFormEducation}
             submitForm={submit}
-            windowCloseCallback={handleClose}
+            windowCloseCallback={clear}
             deleteListItem={itemDelete}
             editListItem={editExperience}
             dataRenderer={educationRenderer}

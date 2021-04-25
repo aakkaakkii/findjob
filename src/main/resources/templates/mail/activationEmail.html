@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <title th:text="#{email.activation.title}">activation</title>
+    </head>
+    <body>
+        <p th:text="#{email.activation.greeting(${user.username})}">
+
+        </p>
+        <p th:text="#{email.activation.text1}"></p>
+        <p>
+            <a th:with="url=(@{|${baseUrl}/account/activate?key=${activationToken}|})"
+               th:href="${url}" th:text="${url}">Activation link</a>
+        </p>
+        <p>
+            <span th:text="#{email.activation.text2}">Regards, </span>
+            <br />
+            <em th:text="#{email.signature}">JHipster.</em>
+        </p>
+    </body>
+</html>

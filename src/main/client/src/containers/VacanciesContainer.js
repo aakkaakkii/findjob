@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import VacancyShort from "../components/Vaccancy/VacancyShort";
 import {loadVacancies} from "../api/vacancyApi";
 import VacanciesPage from "../components/Vaccancy/VacanciesPage";
 
 
 const VacanciesContainer = () => {
-    const PAGE_LIMIT = 3;
+    const PAGE_LIMIT = 2;
     const [vacancies, setVacancies] = useState([]);
     const [currPage, setCurrPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);

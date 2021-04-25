@@ -19,10 +19,12 @@ public class UserRegistrationServiceTests {
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(8);
     private UserRegistrationServiceImpl userService;
+    @Mock
+    private MailService mailService;
 
     @Before
     public void init() {
-        userService = new UserRegistrationServiceImpl(userRepository, passwordEncoder);
+        userService = new UserRegistrationServiceImpl(userRepository, passwordEncoder, mailService);
     }
 
     @Test
@@ -100,6 +102,6 @@ public class UserRegistrationServiceTests {
                 .email(email)
                 .build();
 
-        return userService.register(user);
+        return userService.register(user, null);
     }
 }

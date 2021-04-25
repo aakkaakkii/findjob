@@ -6,6 +6,7 @@ import ge.find.findjob.domain.Organisation;
 import ge.find.findjob.model.OrganisationRequestModel;
 import ge.find.findjob.util.ApiConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

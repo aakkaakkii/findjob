@@ -31,7 +31,7 @@ const ExperienceContainer = () => {
         setExperiences(res.data)
     };
 
-    const handleClose = () => {
+    const clear = () => {
         setFormExperience({
             id: "",
             title: "",
@@ -48,6 +48,7 @@ const ExperienceContainer = () => {
             let res = await addExperience(formExperience);
             setExperiences([...experiences, res.data])
         }
+        clear();
     }
 
     const itemDelete = async (id) => {
@@ -93,7 +94,7 @@ const ExperienceContainer = () => {
             formDataDescription={dataDescription}
             setFormData={setFormExperience}
             submitForm={submit}
-            windowCloseCallback={handleClose}
+            windowCloseCallback={clear}
             deleteListItem={itemDelete}
             editListItem={editExperience}
             dataRenderer={experienceRenderer}

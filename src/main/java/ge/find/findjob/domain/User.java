@@ -1,5 +1,6 @@
 package ge.find.findjob.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ge.find.findjob.util.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Set;
@@ -19,7 +22,7 @@ import java.util.Set;
 @Table(name = "usr")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -29,6 +32,8 @@ public class User implements UserDetails {
     private String password;
     private boolean active = false;
     private boolean blocked = false;
+    @JsonIgnore
+    private Instant createdDate = Instant.now();
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))

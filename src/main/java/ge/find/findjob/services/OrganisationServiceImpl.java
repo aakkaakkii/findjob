@@ -1,13 +1,19 @@
 package ge.find.findjob.services;
 
 import ge.find.findjob.api.OrganisationService;
+import ge.find.findjob.api.VacancyService;
 import ge.find.findjob.domain.Organisation;
+import ge.find.findjob.domain.Vacancy;
 import ge.find.findjob.model.OrganisationRequestModel;
 import ge.find.findjob.repo.OrganisationRepository;
 import ge.find.findjob.repo.UserRepository;
+import ge.find.findjob.repo.VacancyRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,18 +23,23 @@ public class OrganisationServiceImpl implements OrganisationService {
     private final OrganisationRepository organisationRepository;
     private final SecurityUtil securityUtil;
     private final UserRepository userRepository;
+    private final VacancyRepository vacancyRepository;
+    private final CacheManager cacheManager;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Organisation> load() {
         return organisationRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Organisation> loadCurrentUserExperience() {
         return organisationRepository.findByUserId(securityUtil.getCurrentUserId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Organisation get(long id) {
         return organisationRepository.getOne(id);
     }
@@ -75,12 +86,23 @@ public class OrganisationServiceImpl implements OrganisationService {
             throw new RuntimeException("different user");
         }
 
+        deleteVacancies(organisation.getVacancies());
         organisationRepository.delete(organisation);
     }
 
     @Override
     public void adminDelete(long id) {
-        organisationRepository.deleteById(id);
+        Organisation organisation = organisationRepository.getOne(id);
+        deleteVacancies(organisation.getVacancies());
+        organisationRepository.delete(organisation);
+    }
+
+    private void deleteVacancies(List<Vacancy> vacancies) {
+        vacancyRepository.deleteAll(vacancies);
+        Cache cache = cacheManager.getCache(VacancyService.VACANCY_LOAD_CACHE);
+        if(cache != null) {
+            cache.clear();
+        }
     }
 
     @Override

@@ -2,8 +2,6 @@ package ge.find.findjob.services;
 
 import ge.find.findjob.api.VacancyService;
 import ge.find.findjob.domain.*;
-import ge.find.findjob.model.CVRequestModel;
-import ge.find.findjob.model.OrganisationRequestModel;
 import ge.find.findjob.model.VacancyRequestModel;
 import ge.find.findjob.repo.OrganisationRepository;
 import ge.find.findjob.repo.ProfessionRepository;
@@ -16,8 +14,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.cache.CacheManager;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,11 +32,13 @@ public class VacancyServiceTest {
     private ProfessionRepository professionRepository;
     @Mock
     private OrganisationRepository organisationRepository;
+    @Mock
+    private CacheManager cacheManager;
     private VacancyService vacancyService;
 
     @Before
     public void init() {
-        vacancyService = new VacancyServiceImpl(vacancyRepository, professionRepository, organisationRepository, securityUtil);
+        vacancyService = new VacancyServiceImpl(vacancyRepository, professionRepository, organisationRepository, securityUtil, cacheManager);
 
         Mockito.when(vacancyRepository.save(Mockito.any(Vacancy.class)))
                 .thenAnswer(i -> i.getArguments()[0]);

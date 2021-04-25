@@ -17,9 +17,10 @@ import java.util.Collections;
 public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     @Override
-    public User register(RegistrationRequestModel user) {
+    public User register(RegistrationRequestModel user, String locale) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new RuntimeException("already exists");
         }
@@ -44,8 +45,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         //TODO
         String activationToken = newUser.createToken();
         System.out.println("activation token: " + activationToken);
+        newUser =  userRepository.save(newUser);
 
-        return userRepository.save(newUser);
+        mailService.sendActivationEmail(newUser, activationToken, locale);
+
+        return newUser;
     }
 
     @Override

@@ -33,7 +33,7 @@ const OrganisationContainer = () => {
         setOrganisations(res.data)
     };
 
-    const handleClose = () => {
+    const clear = () => {
         setFormOrganisation({
             id: "",
             title: "",
@@ -53,6 +53,7 @@ const OrganisationContainer = () => {
             let res = await addOrganisation(formOrganisation);
             setOrganisations([...organisations, res.data])
         }
+        clear();
     }
 
     const itemDelete = async (id) => {
@@ -108,7 +109,7 @@ const OrganisationContainer = () => {
             formDataDescription={dataDescription}
             setFormData={setFormOrganisation}
             submitForm={submit}
-            windowCloseCallback={handleClose}
+            windowCloseCallback={clear}
             deleteListItem={itemDelete}
             editListItem={editOrganisation}
             dataRenderer={organisationRenderer}

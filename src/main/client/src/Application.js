@@ -17,33 +17,37 @@ import CreateCVContainer from "./containers/CreateCVContainer";
 import CreateVacancyContainer from "./containers/CreateVacancyContainer";
 import UserProfilePage from "./components/UserProfile/UserProfilePage";
 import OrganisationContainer from "./containers/OrganisationContainer";
+import Window from "./hoc/Window/Window";
 
 const Application = () => {
 
     return (
         <CurrentUserProvider>
-            <ThemeWrapper>
-                <Paper style={{minHeight:"100vh", height: "100%", borderRadius: '0'}}>
-                    <Router>
-                        <Header/>
-                        <Switch>
-                            <Route exact path={`/`} render={() => <MainContainer/>}/>
-                            <Route exact path={`/about`} render={() => <AboutContainer/>}/>
-                            <Route exact path={`/vacancies`} render={() => <VacanciesContainer/>}/>
-                            <Route exact path={`/vacancy/:id`} render={() => <VacancyContainer/>}/>
-                            <Route exact path={`/candidates`} render={() => <CandidatesContainer/>}/>
-                            <Route exact path={`/candidate/:id`} render={() => <CandidateContainer/>}/>
-                            <Route exact path={`/registration`} render={() => <RegistrationContainer/>}/>
-                            <Route exact path={`/userVacancies`} render={() => <UserVacanciesContainer/>}/>
-                            <Route exact path={`/createCV`} render={() => <CreateCVContainer/>}/>
-                            <Route exact path={`/createVacancy`} render={() => <CreateVacancyContainer/>}/>
-                            <Route exact path={`/organisation/:id`} render={() => <OrganisationContainer/>}/>
-                            <Route path={`/userProfile`}  render={({match: {url}}) => <UserProfilePage url={url}/>}/>
-                        </Switch>
-                        <Footer/>
-                    </Router>
-                </Paper>
-            </ThemeWrapper>
+            <Window>
+                <ThemeWrapper>
+                    <Paper style={{minHeight: "100vh", height: "100%", borderRadius: '0'}}>
+                        <Router>
+                            <Header/>
+                            <Switch>
+                                <Route exact path={`/`} render={() => <MainContainer/>}/>
+                                <Route exact path={`/about`} render={() => <AboutContainer/>}/>
+                                <Route exact path={`/vacancies`} render={() => <VacanciesContainer/>}/>
+                                <Route exact path={`/vacancy/:id`} render={() => <VacancyContainer/>}/>
+                                <Route exact path={`/candidates`} render={() => <CandidatesContainer/>}/>
+                                <Route exact path={`/candidate/:id`} render={() => <CandidateContainer/>}/>
+                                <Route exact path={`/registration`} render={() => <RegistrationContainer/>}/>
+                                <Route exact path={`/userVacancies`} render={() => <UserVacanciesContainer/>}/>
+                                <Route exact path={`/createCV`} render={() => <CreateCVContainer/>}/>
+                                <Route exact path={`/createVacancy`} render={() => <CreateVacancyContainer/>}/>
+                                <Route exact path={`/organisation/:id`} render={() => <OrganisationContainer/>}/>
+                                <Route path={`/userProfile`} render={({match: {url}}) => <UserProfilePage url={url}/>}/>
+                                <Route path={"/account/activate/:key"} render={()=><Activate/>} />
+                            </Switch>
+                            <Footer/>
+                        </Router>
+                    </Paper>
+                </ThemeWrapper>
+            </Window>
         </CurrentUserProvider>
     )
 };

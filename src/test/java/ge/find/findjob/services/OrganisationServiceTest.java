@@ -6,6 +6,7 @@ import ge.find.findjob.domain.User;
 import ge.find.findjob.model.OrganisationRequestModel;
 import ge.find.findjob.repo.OrganisationRepository;
 import ge.find.findjob.repo.UserRepository;
+import ge.find.findjob.repo.VacancyRepository;
 import ge.find.findjob.util.SecurityUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.cache.CacheManager;
 
 import java.util.UUID;
 
@@ -25,11 +27,15 @@ public class OrganisationServiceTest {
     private SecurityUtil securityUtil;
     @Mock
     private OrganisationRepository organisationRepository;
+    @Mock
+    private CacheManager cacheManager;
+    @Mock
+    private VacancyRepository vacancyRepository;
     private OrganisationService organisationService;
 
     @Before
     public void init() {
-        organisationService = new OrganisationServiceImpl(organisationRepository, securityUtil, userRepository);
+        organisationService = new OrganisationServiceImpl(organisationRepository, securityUtil, userRepository, vacancyRepository,  cacheManager);
 
         Mockito.when(organisationRepository.save(Mockito.any(Organisation.class)))
                 .thenAnswer(i -> i.getArguments()[0]);

@@ -22,7 +22,7 @@ public class CV {
     private String description;
     private Date creationTime;
     private double expectedSalary;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProfessionTag> professionTags;
     private boolean blocked;
     private boolean disabled;

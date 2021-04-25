@@ -52,7 +52,7 @@ const VacancyContainer = ({organisationId}) => {
         setProfessionTags(data.map(d => ({data: d.id, label: d.title})));
     }
 
-    const handleClose = () => {
+    const clear = () => {
         setFormVacancy({
             id: "",
             title: "",
@@ -66,12 +66,14 @@ const VacancyContainer = ({organisationId}) => {
 
     const submit = async () => {
         formVacancy["organisationId"] = organisationId;
+        formVacancy.vacancyType = formVacancy.vacancyType === "" ? null : formVacancy.vacancyType;
         if (formVacancy.id) {
             await updateVacancy(formVacancy, formVacancy.id);
         } else {
             await addVacancy(formVacancy);
         }
         fetchVacancies(organisationId);
+        clear()
     }
 
     const itemDelete = async (id) => {
@@ -137,7 +139,7 @@ const VacancyContainer = ({organisationId}) => {
             formDataDescription={dataDescription}
             setFormData={setFormVacancy}
             submitForm={submit}
-            windowCloseCallback={handleClose}
+            windowCloseCallback={clear}
             deleteListItem={itemDelete}
             editListItem={editExperience}
             dataRenderer={vacancyRenderer}

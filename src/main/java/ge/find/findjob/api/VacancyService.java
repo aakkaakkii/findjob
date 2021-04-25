@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface VacancyService {
     Page<Vacancy> load(int page, int limit);
+    Page<Vacancy> loadNonBlocked(int page, int limit);
     List<Vacancy> loadByOrganisationId(long id);
     Vacancy get(long id);
     List<VacancyType> loadVacancyTypes();
@@ -18,4 +19,6 @@ public interface VacancyService {
     void adminDelete(long id);
     Vacancy blockVacancy(long id);
     Vacancy unblockVacancy(long id);
+
+    String VACANCY_LOAD_CACHE = "vacancies-load";
 }

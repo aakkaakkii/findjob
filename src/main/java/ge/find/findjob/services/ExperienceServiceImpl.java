@@ -8,6 +8,7 @@ import ge.find.findjob.repo.UserRepository;
 import ge.find.findjob.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,16 +20,19 @@ public class ExperienceServiceImpl implements ExperienceService {
     private final SecurityUtil securityUtil;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Experience> loadUserExperience(long userId) {
         return experienceRepository.findByUserId(userId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Experience> loadCurrentUserExperience() {
         return experienceRepository.findByUserId(securityUtil.getCurrentUserId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Experience get(long id) {
         return experienceRepository.getOne(id);
     }

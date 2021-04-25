@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vacancy {
+public class Vacancy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -26,7 +27,7 @@ public class Vacancy {
     private VacancyType vacancyType;
     private boolean blocked;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProfessionTag> professionTags;
     @ManyToOne
     @JoinColumn(name = "organisation_id")

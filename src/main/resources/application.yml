@@ -13,9 +13,44 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  messages:
+    basename: i18n/messages
+  mail:
+    host: smtp.gmail.com
+    username:
+    password:
+    port: 587
+    protocol: smtp
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+
+mail:
+  starttls:
+    enable: true
+  from: foodTinder2020@gmail.com
+  auth: true
+  debug: true
+  baseUrl: http://localhost:8080
 
 jwt:
   token:
     secret: JWTeDiToRaPp
     activation:
       expired: 86400000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,prometheus
+
+findjob:
+  email: foodTinder2020@gmail.com
+  baseUrl: http://localhost:8080
+
+logging:
+  level:
+    ge.find.findjob: DEBUG

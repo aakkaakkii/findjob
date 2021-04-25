@@ -53,7 +53,7 @@ public class PasswordServiceTest {
 
     @Test
     public void changePasswordTest() {
-        User u =createUser();
+        User u = createUser();
 
         Mockito.when(securityUtil.getCurrentUserId())
                 .thenAnswer(i -> u.getId());
@@ -66,17 +66,19 @@ public class PasswordServiceTest {
         changePasswordRequestModel.newPassword = "password2";
         changePasswordRequestModel.repeatPassword = "password2";
 
-        User changedUser =  passwordService.changePassword(changePasswordRequestModel);
+        User changedUser = passwordService.changePassword(changePasswordRequestModel);
         Assertions.assertTrue(passwordEncoder.matches(changePasswordRequestModel.newPassword, changedUser.getPassword()));
 
 
         changePasswordRequestModel.newPassword = "anotherPassword";
-        User changedUser2 =  passwordService.changePassword(changePasswordRequestModel);
-        Assertions.assertFalse(passwordEncoder.matches(changePasswordRequestModel.newPassword, changedUser2.getPassword()));
+        RuntimeException passwordDontMatches = Assertions.assertThrows(RuntimeException.class, () -> {
+            passwordService.changePassword(changePasswordRequestModel);
+        });
 
         changePasswordRequestModel.currentPassword = "anotherPassword";
-        User changedUser3 =  passwordService.changePassword(changePasswordRequestModel);
-        Assertions.assertFalse(passwordEncoder.matches(changePasswordRequestModel.newPassword, changedUser3.getPassword()));
+        RuntimeException currentPasswordIsIncorrect = Assertions.assertThrows(RuntimeException.class, () -> {
+            passwordService.changePassword(changePasswordRequestModel);
+        });
 
     }
 
